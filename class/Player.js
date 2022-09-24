@@ -1,11 +1,16 @@
+import { SnakeBody } from "./SnakeBody.js";
+
 export class Player {
     constructor(x, y, color, name, ctx) {
         this.x = x;
         this.y = y;
+        this.oldX;
+        this.oldY;
         this.color = color;
         this.name = name;
         this.ctx = ctx;
         this.direction = ''
+        this.body = []
     }
 
     draw() {
@@ -22,9 +27,40 @@ export class Player {
         this.ctx.fillRect(newX, newY, 20, 20)
     }
 
+    updateBody() {
+        if (this.body.length > 0) {
+            this.body.forEach((bodyPart, index) => {
+                bodyPart.draw()
+                switch (this.getDirection()) {
+                    case 'DOWN':
+                        index == 0
+                            ? bodyPart.update(this.oldX, this.oldY)
+                            : bodyPart.update(this.oldX, this.body[index - 1].y - 20)
+                        break;
+                    case 'UP':
+                        index == 0
+                            ? bodyPart.update(this.oldX, this.oldY)
+                            : bodyPart.update(this.oldX, this.body[index - 1].y + 20)
+                        break;
+                    case 'LEFT':
+                        index == 0
+                            ? bodyPart.update(this.oldX, this.oldY)
+                            : bodyPart.update(this.body[index - 1].x + 20, this.oldY)
+                        break;
+                    case 'RIGHT':
+                        index == 0
+                            ? bodyPart.update(this.oldX, this.oldY)
+                            : bodyPart.update(this.body[index - 1].x - 20, this.oldY)
+                        break;
+                }
+            })
+        }
+    }
+
     movement() {
-
-
+        this.updateBody()
+        this.oldY = this.y
+        this.oldX = this.x
         switch (this.direction) {
             case 'DOWN':
                 this.y != 380
@@ -60,16 +96,20 @@ export class Player {
     }
 
     checkCollision(block) {
-        let newX = (Math.floor(Math.random() * 19 - 0 + 1)) * 20;
-        let newY = (Math.floor(Math.random() * 19 - 0 + 1)) * 20;
-
         if (
             this.x < block.x + 20 &&
             this.x + 20 > block.x &&
             this.y < block.y + 20 &&
             this.y + 20 > block.y
             ) {
-                this.update(newX, newY)
+                const colors = ['red', 'yellow', 'blue', 'green']
+                let selectedColor = Math.floor(Math.random() * colors.length - 0);
+
+                console.log(colors[selectedColor]);
+
+                let newBody = new SnakeBody(this.x, this.y, colors[selectedColor], this.ctx)
+                newBody.draw()
+                this.body.push(newBody)
             }
     }
     

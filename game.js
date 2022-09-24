@@ -61,12 +61,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
                     player.setDirection('DOWN')
                     break;
             }
-
-            
         })
 
         setInterval(() => {
             player.movement()
+            player.checkCollision(food)
             food.collision(player)
             player.draw()
             food.draw()
