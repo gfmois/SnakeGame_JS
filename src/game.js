@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         let playerY = Math.floor(Math.random() * 19 - 0 + 1) * 20
 
         let food = new Food(foodX, foodY, 'red', ctx)
-        let player = new Player(playerX, playerY, 'blue', 'Moises', ctx)
+        let player = new Player(playerX, playerY, 'Moises', ctx)
         
         player.draw()
         food.draw()

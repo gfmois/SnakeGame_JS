@@ -7,8 +7,15 @@ export class Food {
     }
 
     draw() {
-        this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.x, this.y, 20, 20)
+        let img = new Image()
+
+        img.src = 'src/assets/img/apple.png'
+        img.onload = () => {
+            this.ctx.drawImage(img, this.x, this.y, 20, 20);
+            // this.ctx.fillStyle = this.color
+            // this.ctx.fillRect(this.x, this.y, 20, 20)
+        }
+
     }
 
     update(newX, newY) {
@@ -17,7 +24,7 @@ export class Food {
         this.x = newX;
         this.y = newY;
 
-        this.ctx.fillRect(newX, newY, 20, 20)
+        // this.ctx.fillRect(newX, newY, 20, 20)
     }
 
     collision(player) {
