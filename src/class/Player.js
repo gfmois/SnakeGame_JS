@@ -22,7 +22,7 @@ export class Player {
             case 'DOWN':
                 this.sprite.src = 'src/assets/img/snakeHead_down.png'
                 break;
-                case 'RIGHT':
+            case 'RIGHT':
                 this.sprite.src = 'src/assets/img/snakeHead_right.png'
                 break;
             case 'LEFT':
@@ -31,7 +31,6 @@ export class Player {
             default: 
                 this.sprite.src = 'src/assets/img/snakeHead.png'
                 break;
-
         }
 
         this.sprite.onload = () => {
@@ -44,56 +43,29 @@ export class Player {
 
         this.x = newX;
         this.y = newY;
-        
     }
 
     updateBody() {
         if (this.body.length > 0) {
             this.body.forEach((bodyPart, index) => {
-                switch (this.oldDirection) {
-                    case 'DOWN':
-                        index == 0
-                            ? bodyPart.update(this.oldX, this.oldY, this.oldDirection)
-                            : bodyPart.update(
-                                this.body[index - 1].x, 
-                                this.body[index - 1].y - 20, 
-                                this.body[index - 1].oldDirection
-                            )
-                        break;
-                    case 'UP':
-                        index == 0
-                            ? bodyPart.update(this.oldX, this.oldY, this.oldDirection)
-                            : bodyPart.update(
-                                this.body[index - 1].x, 
-                                this.body[index - 1].y + 20, 
-                                this.body[index - 1].oldDirection
-                            )
-                        break;
-                    case 'LEFT':
-                        index == 0
-                            ? bodyPart.update(this.oldX, this.oldY, this.oldDirection)
-                            : bodyPart.update(
-                                this.body[index - 1].x - 20, 
-                                this.body[index - 1].y, 
-                                this.body[index - 1].oldDirection
-                            )
-                        break;
-                    case 'RIGHT':
-                        index == 0
-                            ? bodyPart.update(this.oldX, this.oldY, this.oldDirection)
-                            : bodyPart.update(
-                                this.body[index - 1].x + 20, 
-                                this.body[index - 1].y, 
-                                this.body[index - 1].oldDirection
-                            )
-                        break;
-                }
+                index == 0
+                    ? (
+                        bodyPart.update(this.oldX, this.oldY, this.oldDirection),
+                        bodyPart.setSnakeSpriteDirection(this.direction)
+                    )
+                    : (
+                        bodyPart.update(
+                            this.body[index - 1].oldX, 
+                            this.body[index - 1].oldY, 
+                            this.body[index - 1].oldDirection
+                        ),
+                        bodyPart.setSnakeSpriteDirection(this.body[index - 1].getDirection())   
+                    )
 
-                console.log(this.oldDirection);
-                bodyPart.setSnakeSpriteDirection(this.direction)   
+                    console.log(bodyPart.getDirection())
+                
             })
         }
-
     }
 
     movement() {
