@@ -18,9 +18,11 @@ class SnakeBody {
     }
 
     update(newX, newY, newDirection) {
+        this.direction = newDirection
         let oldValue = this.direction
-        this.setDirection(newDirection)
         this.oldDirection = oldValue
+
+        console.log(this.direction, oldValue, this.oldDirection);
 
         this.ctx.clearRect(this.x, this.y, 20, 20)
 
@@ -44,7 +46,6 @@ class SnakeBody {
     }
 
     setSnakeSpriteDirection(newDirection) {
-        console.log(this.direction, newDirection);
         switch(true) {
             case this.direction == 'DOWN' && newDirection == 'LEFT':
                 this.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'

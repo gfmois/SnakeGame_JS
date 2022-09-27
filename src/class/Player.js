@@ -51,7 +51,7 @@ export class Player {
             this.body.forEach((bodyPart, index) => {
                 index == 0
                     ? (
-                        bodyPart.update(this.oldX, this.oldY, this.oldDirection),
+                        bodyPart.update(this.x, this.y, this.oldDirection),
                         bodyPart.setSnakeSpriteDirection(this.direction)
                     )
                     : (
@@ -116,8 +116,9 @@ export class Player {
             this.y < block.y + 20 &&
             this.y + 20 > block.y
             ) {
-                let newBody = new SnakeBody(this.oldX, this.oldY, this.ctx)
-                newBody.draw()
+                let newBody = new SnakeBody(this.x, this.y, this.ctx)
+                console.log(newBody);
+                newBody.setDirection()
                 this.body.push(newBody)
             }
     }
