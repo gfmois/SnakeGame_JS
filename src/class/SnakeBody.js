@@ -66,5 +66,3 @@ class SnakeBody {
         this.draw()
     }
 }
-
-export { SnakeBody }

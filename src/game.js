@@ -1,6 +1,3 @@
-import { Food } from './class/Food.js';
-import { Player } from './class/Player.js'
-
 document.addEventListener('DOMContentLoaded', (e) => {
     const canvasGame = document.querySelector('canvas')
     const ctx = canvasGame.getContext('2d')

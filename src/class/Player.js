@@ -1,6 +1,4 @@
-import { SnakeBody } from "./SnakeBody.js";
-
-export class Player {
+class Player {
     constructor(x, y, name, ctx) {
         this.x = x;
         this.y = y;
