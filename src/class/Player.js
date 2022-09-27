@@ -12,6 +12,7 @@ export class Player {
         this.oldDirection
         this.body = []
         this.sprite = new Image()
+        this.counter = 0;
     }
 
     draw() {
@@ -61,13 +62,11 @@ export class Player {
                         ),
                         bodyPart.setSnakeSpriteDirection(this.body[index - 1].getDirection())   
                     )
-
-                    console.log(bodyPart.getDirection())
-                
             })
         }
     }
 
+    
     movement() {
         this.updateBody()
         this.oldY = this.y
@@ -97,6 +96,8 @@ export class Player {
             default:
                 break;
         }
+
+        this.oldDirection = this.direction
     }
 
     setDirection(direction) {

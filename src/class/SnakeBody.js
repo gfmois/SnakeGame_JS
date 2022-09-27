@@ -6,6 +6,7 @@ class SnakeBody {
         this.oldY
         this.ctx = ctx
         this.direction
+        this.oldDirection
         this.sprite = new Image()
     }
 
@@ -17,7 +18,9 @@ class SnakeBody {
     }
 
     update(newX, newY, newDirection) {
+        let oldValue = this.direction
         this.setDirection(newDirection)
+        this.oldDirection = oldValue
 
         this.ctx.clearRect(this.x, this.y, 20, 20)
 
@@ -32,6 +35,7 @@ class SnakeBody {
     }
 
     setDirection(nDirection) {
+        this.oldDirection = this.direction
         this.direction = nDirection
     }
 
@@ -40,7 +44,24 @@ class SnakeBody {
     }
 
     setSnakeSpriteDirection(newDirection) {
-        console.log('NewDirection', newDirection, 'OldDirection', this.getDirection());
+        console.log(this.direction, newDirection);
+        switch(true) {
+            case this.direction == 'DOWN' && newDirection == 'LEFT':
+                this.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'
+                break
+            case this.direction == 'UP' || this.direction == 'UP' 
+            && newDirection == 'DOWN' || this.direction == 'DOWN':
+                this.sprite.src = 'src/assets/img/snakeBody_down.png'
+                break;
+            case this.direction == 'RIGHT' || this.direction == 'RIGHT' 
+            && newDirection == 'LEFT' || this.direction == 'LEFT':
+                this.sprite.src = 'src/assets/img/snakeBody_left.png'
+                break;
+            default:
+                this.sprite.src = 'src/assets/img/snakeBody_left.png'
+                break;
+        }
+
         this.draw()
     }
 }
