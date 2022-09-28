@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             player.draw()
             food.draw()
             drawGrid()
-        }, 500)
+        }, 450)
     }
 
     drawGrid()

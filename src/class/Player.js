@@ -47,19 +47,18 @@ class Player {
     updateBody() {
         if (this.body.length > 0) {
             this.body.forEach((bodyPart, index) => {
-                index == 0
-                    ? (
-                        bodyPart.update(this.x, this.y, this.oldDirection),
-                        bodyPart.setSnakeSpriteDirection(this.direction)
+                
+                if( index == 0 ) {
+                    bodyPart.update(this.x, this.y, this.oldDirection)
+                    bodyPart.setSnakeSpriteDirection(this.direction)
+                } else {
+                    bodyPart.update(
+                        this.body[index - 1].oldX, 
+                        this.body[index - 1].oldY, 
+                        this.body[index - 1].oldDirection
                     )
-                    : (
-                        bodyPart.update(
-                            this.body[index - 1].oldX, 
-                            this.body[index - 1].oldY, 
-                            this.body[index - 1].oldDirection
-                        ),
-                        bodyPart.setSnakeSpriteDirection(this.body[index - 1].getDirection())   
-                    )
+                    bodyPart.setSnakeSpriteDirection(this.body[index - 1].getDirection())   
+                }
             })
         }
     }
@@ -115,7 +114,6 @@ class Player {
             this.y + 20 > block.y
             ) {
                 let newBody = new SnakeBody(this.x, this.y, this.ctx)
-                console.log(newBody);
                 newBody.setDirection()
                 this.body.push(newBody)
             }

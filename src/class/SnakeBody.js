@@ -1,5 +1,5 @@
 class SnakeBody {
-    constructor(x, y, ctx, direction = '') {
+    constructor(x, y, ctx) {
         this.x = x
         this.y = y
         this.oldX
@@ -17,14 +17,13 @@ class SnakeBody {
         }
     }
 
-    update(newX, newY, newDirection) {
-        this.direction = newDirection
-        let oldValue = this.direction
-        this.oldDirection = oldValue
-
-        console.log(this.direction, oldValue, this.oldDirection);
+    async update(newX, newY, newDirection) {
+        this.oldDirection =  await this.direction
+        this.direction =  newDirection
 
         this.ctx.clearRect(this.x, this.y, 20, 20)
+
+        console.log('This.Direction:', this.direction, 'This.oldDirection:', this.oldDirection);
 
         this.oldX = this.x
         this.oldY = this.y
