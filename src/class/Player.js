@@ -9,7 +9,7 @@ class Player {
         this.direction
         this.direction = ['RIGHT', 'LEFT', 'UP', 'DOWN']
         this.oldDirection
-        this.body = []
+        this.body = [new SnakeBody(this.x, this.y, this.ctx, "body_1"),new SnakeBody(this.x, this.y, this.ctx, "body_2"),new SnakeBody(this.x, this.y, this.ctx, "body_3")]
         this.sprite = new Image()
         this.counter = 0;
     }
@@ -48,8 +48,6 @@ class Player {
     updateBody() {
         if (this.body.length > 0) {
             this.body.forEach((bodyPart, index) => {
-                let thisBodyPart = bodyPart
-
                 if( index == 0 ) {
                     bodyPart.update(this.x, this.y, this.oldDirection)
                     bodyPart.setSnakeSpriteDirection(this.direction)
@@ -120,7 +118,8 @@ class Player {
             this.y < block.y + 20 &&
             this.y + 20 > block.y
             ) {
-                let newBody = new SnakeBody(this.x, this.y, this.ctx)
+                let name = this.body.length
+                let newBody = new SnakeBody(this.x, this.y, this.ctx, name)
                 newBody.setDirection()
                 this.body.push(newBody)
             }
