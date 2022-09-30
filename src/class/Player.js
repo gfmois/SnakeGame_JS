@@ -7,6 +7,7 @@ class Player {
         this.name = name;
         this.ctx = ctx;
         this.direction
+        this.direction = ['RIGHT', 'LEFT', 'UP', 'DOWN']
         this.oldDirection
         this.body = []
         this.sprite = new Image()
@@ -47,23 +48,29 @@ class Player {
     updateBody() {
         if (this.body.length > 0) {
             this.body.forEach((bodyPart, index) => {
-                
+                let thisBodyPart = bodyPart
+
                 if( index == 0 ) {
                     bodyPart.update(this.x, this.y, this.oldDirection)
                     bodyPart.setSnakeSpriteDirection(this.direction)
+                    bodyPart.checkPart(bodyPart, this)
                 } else {
                     bodyPart.update(
-                        this.body[index - 1].oldX, 
-                        this.body[index - 1].oldY, 
-                        this.body[index - 1].oldDirection
+                        this.body[index - 1].x, 
+                        this.body[index - 1].y, 
+                        this.body[index - 1].direction
                     )
-                    bodyPart.setSnakeSpriteDirection(this.body[index - 1].getDirection())   
+                    bodyPart.setSnakeSpriteDirection(this.body[index - 1].direction)   
+                    if (index + 1 != this.body.length) {
+                        bodyPart.checkPart(this.body[index - 1], this, this.body[index + 1])
+                    } else {
+                        bodyPart.checkPart(this.body[index - 1], this)
+                    }
                 }
             })
         }
     }
 
-    
     movement() {
         this.updateBody()
         this.oldY = this.y

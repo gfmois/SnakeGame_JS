@@ -23,8 +23,6 @@ class SnakeBody {
 
         this.ctx.clearRect(this.x, this.y, 20, 20)
 
-        console.log('This.Direction:', this.direction, 'This.oldDirection:', this.oldDirection);
-
         this.oldX = this.x
         this.oldY = this.y
         this.x = newX;
@@ -44,24 +42,96 @@ class SnakeBody {
         return this.direction
     }
 
-    setSnakeSpriteDirection(newDirection) {
-        switch(true) {
-            case this.direction == 'DOWN' && newDirection == 'LEFT':
+    checkPart(nextMove, player, nextBodyPart) {
+        // ANCHOR: Left Site
+        if (player.x == nextMove.x && nextMove.x < this.x) {
+            // NOTE U Movement Up from Left
+            if (this.y > player.y) {
+                this.sprite.src = 'src/assets/img/snakeBody_rotateUpRight.png'
+                if (typeof nextBodyPart != "undefined") {
+                    nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'
+                }
+            // NOTE ⋂ Movement from Left
+            } else if (this.y < player.y) {
+                this.sprite.src = 'src/assets/img/snakeBody_rotateDownRight.png'
+                if (typeof nextBodyPart != "undefined") {
+                    nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateUpLeft.png'
+                }
+            }
+        // ANCHOR Right Site
+        } else if (player.x == nextMove.x && nextMove.x > this.x) {
+            // NOTE U ⊐ Movement from Left
+            if (this.y > player.y) {
                 this.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'
-                break
-            case this.direction == 'UP' || this.direction == 'UP' 
-            && newDirection == 'DOWN' || this.direction == 'DOWN':
-                this.sprite.src = 'src/assets/img/snakeBody_down.png'
-                break;
-            case this.direction == 'RIGHT' || this.direction == 'RIGHT' 
-            && newDirection == 'LEFT' || this.direction == 'LEFT':
-                this.sprite.src = 'src/assets/img/snakeBody_left.png'
-                break;
-            default:
-                this.sprite.src = 'src/assets/img/snakeBody_left.png'
-                break;
+                if (typeof nextBodyPart != "undefined") {
+                    nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateUpRight.png'
+                }
+            // NOTE ⋂⊐ Movement from Left
+            } else if (this.y < player.y) {
+                this.sprite.src = 'src/assets/img/snakeBody_rotateUpLeft.png'
+                if (typeof nextBodyPart != "undefined") {
+                    nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateDownRight.png'
+                }
+            }
+        // ANCHOR Right and Left Movement    
+        } else if (
+            player.x > nextMove.x && nextMove.x > this.x || 
+            player.x < nextMove.x && nextMove.x < this.x
+        ) {
+            this.sprite.src = 'src/assets/img/snakeBody_left.png'
+        // ANCHOR Up Down Movement
+        } else if (
+            player.y > nextMove.y && nextMove.y > this.y ||
+            player.y < nextMove.y && nextMove.y < this.y
+        ) {
+            this.sprite.src = 'src/assets/img/snakeBody_down.png'
         }
+        
+        
+        // if (
+        //     this.y < nextMove.y && nextMove.y > this.y &&
+        //     nextMove.x > this.x && this.x < nextMove.x      
+        //     ) {
+        //     console.log('INSIDE');
+        //     this.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'
+        // } else if (
+        //     // Left - Right
+        //     this.x < nextMove.x && nextMove.x > this.x &&
+        //     this.y == nextMove.y || this.x > nextMove.x && nextMove.x < this.x &&
+        //     this.y == nextMove.y
+        // ) {
+        //     this.sprite.src = 'src/assets/img/snakeBody_left.png'
+        // } else if (
+        //     // Up - Down
+        //     this.y > nextMove.y && nextMove.y < this.y &&
+        //     this.x == nextMove.x || this.y < nextMove.y && nextMove.y > this.y &&
+        //     this.x == nextMove.x
+        // ) {
+        //     this.sprite.src = 'src/assets/img/snakeBody_down.png'
+        // }
+
 
         this.draw()
+    }
+
+    setSnakeSpriteDirection(newDirection) {
+        // switch(true) {
+        //     case this.direction == 'DOWN' && newDirection == 'LEFT':
+        //         this.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'
+        //         break
+        //     case this.direction == 'UP' || this.direction == 'UP' 
+        //     && newDirection == 'DOWN' || this.direction == 'DOWN':
+        //         this.sprite.src = 'src/assets/img/snakeBody_down.png'
+        //         break;
+        //     case this.direction == 'RIGHT' || this.direction == 'RIGHT' 
+        //     && newDirection == 'LEFT' || this.direction == 'LEFT':
+        //         this.sprite.src = 'src/assets/img/snakeBody_left.png'
+        //         break;
+        //     default:
+        //         this.sprite.src = 'src/assets/img/snakeBody_left.png'
+        //         break;
+        // }
+
+        // this.draw()
     }
 }
