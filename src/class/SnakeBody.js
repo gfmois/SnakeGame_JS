@@ -124,9 +124,9 @@ class SnakeBody {
                 }
             } else if (player.x < this.x) {
                 if (player.y > this.y && player.y == nextMove.y) {
-                    this.sprite.src = this.sprites.UP_RIGHT
+                    this.sprite.src = this.sprites.DOWN_LEFT
                 } else if (player.y < this.y && player.y == nextMove.y) {
-                    this.sprite.src = this.sprites.DOWN_RIGTH
+                    this.sprite.src = this.sprites.UP_LEFT
                 }
             }
         }
