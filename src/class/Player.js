@@ -51,7 +51,7 @@ class Player {
                 if( index == 0 ) {
                     bodyPart.update(this.x, this.y, this.oldDirection)
                     bodyPart.setSnakeSpriteDirection(this.direction)
-                    bodyPart.checkPart(bodyPart, this)
+                    bodyPart.asdf(this)
                 } else {
                     bodyPart.update(
                         this.body[index - 1].x, 
@@ -62,7 +62,7 @@ class Player {
                     if (index + 1 != this.body.length) {
                         bodyPart.checkPart(this.body[index - 1], this, this.body[index + 1])
                     } else {
-                        bodyPart.checkPart(this.body[index - 1], this)
+                        bodyPart.checkPart(this.body[index - 1], this, undefined)
                     }
                 }
             })

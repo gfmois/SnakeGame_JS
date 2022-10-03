@@ -18,6 +18,12 @@ class SnakeBody {
             DOWN_RIGTH: "src/assets/img/snakeBody_rotateDownRight.png",
             DOWN_UP: 'src/assets/img/snakeBody_down.png',
         }
+        this.directions = {
+            LEFT: "LEFT",
+            RIGHT: "RIGHT",
+            UP: "UP",
+            DOWN: "DOWN"
+        }
     }
 
     draw(headDirection) {
@@ -52,104 +58,64 @@ class SnakeBody {
         return this.direction
     }
 
-    checkPart(nextMove, player, nextBodyPart) {
-        // ANCHOR: Left Site
-        // if (player.x == nextMove.x && nextMove.x < this.x) {
-        //     // NOTE U Movement Up from Left
-        //     if (this.y > player.y) {
-        //         this.sprite.src = 'src/assets/img/snakeBody_rotateUpRight.png'
-        //         if (typeof nextBodyPart != "undefined" && player.x < this.x) {
-        //             console.log('A');
-        //             // nextBodyPart.sprite.src = "src/assets/img/snakeBody_rotateUpLeft.png"
-        //         } else if (typeof nextBodyPart != "undefined") {
-        //             nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'
-        //         }
-        //     // NOTE ⋂ Movement from Left
-        //     } else if (this.y < player.y) {
-        //         this.sprite.src = 'src/assets/img/snakeBody_rotateDownRight.png'
-        //         if (typeof nextBodyPart != "undefined") {
-        //             nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateUpLeft.png'
-        //         }
-        //     }
-        // // ANCHOR Right Site
-        // } else if (player.x == nextMove.x && nextMove.x > this.x) {
-        //     // NOTE U ⊐ Movement from Left
-        //     if (this.y > player.y) {
-        //         this.sprite.src = 'src/assets/img/snakeBody_rotateDownLeft.png'
-        //         if (typeof nextBodyPart != "undefined") {
-        //             nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateUpRight.png'
-        //         }
-        //     // NOTE ⋂⊐ Movement from Left
-        //     } else if (this.y < player.y) {
-        //         this.sprite.src = 'src/assets/img/snakeBody_rotateUpLeft.png'
-        //         if (typeof nextBodyPart != "undefined") {
-        //             nextBodyPart.sprite.src = 'src/assets/img/snakeBody_rotateDownRight.png'
-        //         }
-        //     }
-        // // ANCHOR Right and Left Movement    
-        // } else if (
-        //     player.x > nextMove.x && nextMove.x > this.x || 
-        //     player.x < nextMove.x && nextMove.x < this.x
-        // ) {
-        //     this.sprite.src = 'src/assets/img/snakeBody_left.png'
-        // // ANCHOR Up Down Movement
-        // } else if (
-        //     player.y > nextMove.y && nextMove.y > this.y ||
-        //     player.y < nextMove.y && nextMove.y < this.y
-        // ) {
-        //     this.sprite.src = 'src/assets/img/snakeBody_down.png'
-        // }
+    checkPart(previousBodyPart, player, nextBodyPart) {
+        previousBodyPart = typeof previousBodyPart == "undefined" ? player : previousBodyPart
+        nextBodyPart = typeof nextBodyPart == "undefined" ? this : nextBodyPart
         
         // FIXME RIGHT LEFT MOVEMENT
-        if (nextMove.x > this.x || nextMove.x < this.x) {
+        if (previousBodyPart.x > this.x || previousBodyPart.x < this.x) {
             this.sprite.src = this.sprites.LEFT_RIGTH
-            
+
             if (player.y > this.y) {
-                if (player.x > this.x && player.x == nextMove.x) {
+                if (player.x > this.x && player.x == previousBodyPart.x) {
+                    console.log('A');
                     this.sprite.src = this.sprites.UP_LEFT
-                    console.log("LEFT - DOWN");
-                    this.lastCorner = "LEFT - DOWN"
-                } else if (player.x < this.x && player.x == nextMove.x) {
-                    this.sprite.src = this.sprites.DOWN_RIGTH
-                    console.log("RIGTH - DOWN");
-
-                    if (this.lastCorner == 'UP - LEFT') {
-                        this.sprite.src = this.sprites.DOWN_RIGTH
+                    console.log(typeof nextBodyPart);
+                    if (typeof nextBodyPart != "undefined") {
+                        console.log();
+                        console.log(player.y > this.y);
+                        console.log(this.y == nextBodyPart.y);
+                        if (this.y == previousBodyPart.y && this.x > nextBodyPart.x) {
+                            if (this.y < player.y) {
+                                console.log(true, "piuta");
+                            }
+                        }
+                        console.log('B');
                     }
-
+                    this.lastCorner = "LEFT - DOWN"
+                } else if (player.x < this.x && player.x == previousBodyPart.x) {
+                    this.sprite.src = this.sprites.DOWN_RIGTH
                     this.lastCorner = "RIGTH - DOWN"
-
-                } else if (nextMove.x > this.x && player.y > nextMove.x && player.x == nextMove.x) {
                 }
             } else if (player.y < this.y) {
-                if (player.x > this.x && player.x == nextMove.x) {
+                if (player.x > this.x && player.x == previousBodyPart.x) {
                     this.sprite.src = this.sprites.DOWN_LEFT
                     console.log("LEFT - UP");
                     this.lastCorner = "LEFT - UP"
-                } else if (player.x < this.x && player.x == nextMove.x) {
+                } else if (player.x < this.x && player.x == previousBodyPart.x) {
                     this.sprite.src = this.sprites.UP_RIGHT
                     console.log("RIGTH - UP");
                     this.lastCorner = "RIGTH - UP"
                 }
             }
-        } else if (nextMove.y > this.y || nextMove.y < this.y) {
+        } else if (previousBodyPart.y > this.y || previousBodyPart.y < this.y) {
             this.sprite.src = this.sprites.DOWN_UP
             if (player.x > this.x) {
-                if (player.y > this.y && player.y == nextMove.y) {
+                if (player.y > this.y && player.y == previousBodyPart.y) {
                     this.sprite.src = this.sprites.UP_RIGHT
                     console.log("DOWN - RIGTH");
                     this.lastCorner = "DOWN - RIGTH"
-                } else if (player.y < this.y && player.y == nextMove.y) {
+                } else if (player.y < this.y && player.y == previousBodyPart.y) {
                     this.sprite.src = this.sprites.DOWN_RIGTH
                     console.log("UP - RIGTH");
                     this.lastCorner = "UP - RIGTH"
                 }
             } else if (player.x < this.x) {
-                if (player.y > this.y && player.y == nextMove.y) {
+                if (player.y > this.y && player.y == previousBodyPart.y) {
                     this.sprite.src = this.sprites.DOWN_LEFT
                     console.log("DOWN - LEFT");
                     this.lastCorner = "DOWN - LEFT"
-                } else if (player.y < this.y && player.y == nextMove.y) {
+                } else if (player.y < this.y && player.y == previousBodyPart.y) {
                     this.sprite.src = this.sprites.UP_LEFT
                     console.log("UP - LEFT");
                     this.lastCorner = "UP - LEFT"
@@ -159,6 +125,16 @@ class SnakeBody {
 
 
         this.draw()
+    }
+
+    asdf(player) {
+        // Left
+        if (this.x > player.x || this.x < player.x) {
+            this.sprite.src = this.sprites.LEFT_RIGTH
+        // Up Down
+        } else if (this.y > player.y || this.y < player.y) {
+            this.sprite.src = this.sprites.DOWN_UP
+        }
     }
 
     setSnakeSpriteDirection(newDirection) {
