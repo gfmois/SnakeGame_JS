@@ -60,7 +60,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             }
         })
 
-        setInterval(() => {
+        interval = setInterval(() => {
+            player.interval = interval
             player.movement()
             player.checkCollision(food)
             food.collision(player)

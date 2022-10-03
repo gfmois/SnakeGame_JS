@@ -26,36 +26,23 @@ class SnakeBody {
         }
     }
 
-    draw(headDirection) {
-        this.direction = headDirection
+    draw() {
         this.sprite.onload = () => {
             this.ctx.drawImage(this.sprite, this.x, this.y, 20, 20)
         }
     }
 
-    async update(newX, newY, newDirection) {
-        this.oldDirection =  await this.direction
-        this.direction =  newDirection
-
+    async update(newX, newY) {
         this.ctx.clearRect(this.x, this.y, 20, 20)
 
-        this.oldX = this.x
-        this.oldY = this.y
+        this.oldX = await this.x
+        this.oldY = await this.y
         this.x = newX;
         this.y = newY;
         
         this.sprite.onload = () => {
             this.ctx.drawImage(this.sprite, this.x, this.y, 20, 20)
         }
-    }
-
-    setDirection(nDirection) {
-        this.oldDirection = this.direction
-        this.direction = nDirection
-    }
-
-    getDirection() {
-        return this.direction
     }
 
     checkPart(previousBodyPart, player, nextBodyPart) {
@@ -135,9 +122,5 @@ class SnakeBody {
         } else if (this.y > player.y || this.y < player.y) {
             this.sprite.src = this.sprites.DOWN_UP
         }
-    }
-
-    setSnakeSpriteDirection(newDirection) {
-        
     }
 }

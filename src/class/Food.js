@@ -27,6 +27,10 @@ class Food {
         // this.ctx.fillRect(newX, newY, 20, 20)
     }
 
+    getClassName() {
+        return this.constructor.name
+    }
+
     collision(player) {
         let newX = (Math.floor(Math.random() * 19 - 0 + 1)) * 20;
         let newY = (Math.floor(Math.random() * 19 - 0 + 1)) * 20;

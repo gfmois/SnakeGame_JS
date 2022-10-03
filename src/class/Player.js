@@ -9,9 +9,10 @@ class Player {
         this.direction
         this.direction = ['RIGHT', 'LEFT', 'UP', 'DOWN']
         this.oldDirection
-        this.body = [new SnakeBody(this.x, this.y, this.ctx, "body_1"),new SnakeBody(this.x, this.y, this.ctx, "body_2"),new SnakeBody(this.x, this.y, this.ctx, "body_3")]
+        this.body = []
         this.sprite = new Image()
         this.counter = 0;
+        this.interval
     }
 
     draw() {
@@ -38,19 +39,23 @@ class Player {
         }
     }
 
-    update(newX, newY) {
+    async update(newX, newY) {
         this.ctx.clearRect(this.x, this.y, 20, 20)
 
-        this.x = newX;
-        this.y = newY;
+        this.x = await newX;
+        this.y = await newY;
+    }
+
+    destroy(interval) {
+        clearInterval(interval)
     }
 
     updateBody() {
         if (this.body.length > 0) {
             this.body.forEach((bodyPart, index) => {
+                this.checkCollision(bodyPart, this.interval)
                 if( index == 0 ) {
-                    bodyPart.update(this.x, this.y, this.oldDirection)
-                    bodyPart.setSnakeSpriteDirection(this.direction)
+                    bodyPart.update(this.x, this.y)
                     bodyPart.asdf(this)
                 } else {
                     bodyPart.update(
@@ -58,7 +63,6 @@ class Player {
                         this.body[index - 1].y, 
                         this.body[index - 1].direction
                     )
-                    bodyPart.setSnakeSpriteDirection(this.body[index - 1].direction)   
                     if (index + 1 != this.body.length) {
                         bodyPart.checkPart(this.body[index - 1], this, this.body[index + 1])
                     } else {
@@ -111,17 +115,23 @@ class Player {
         return this.direction
     }
 
-    checkCollision(block) {
+    checkCollision(block, interval) {
         if (
             this.x < block.x + 20 &&
             this.x + 20 > block.x &&
             this.y < block.y + 20 &&
             this.y + 20 > block.y
             ) {
-                let name = this.body.length
-                let newBody = new SnakeBody(this.x, this.y, this.ctx, name)
-                newBody.setDirection()
-                this.body.push(newBody)
+                if (block.constructor.name == "Food") {
+                    let name = this.body.length
+                    let newBody = new SnakeBody(this.x, this.y, this.ctx, name)
+                    this.body.push(newBody)
+                } else {
+                    if (block.constructor.name == "SnakeBody" && block.x == this.x && this.y == block.y) {
+                        console.log(this.x, block.x);
+                        this.destroy(this.interval)
+                    }
+                }
             }
     }
     
