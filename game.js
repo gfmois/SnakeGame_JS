@@ -2,8 +2,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const canvasGame = document.querySelector("canvas");
   const ctx = canvasGame.getContext("2d");
 
+  let dialog = document.getElementById('dialog')
+  let score = document.getElementById('score')
+  let acceptOption = document.getElementById('accept')
+  let declineOption = document.getElementById('decline')
+
   const level = {
-    difficulty: 500
+    difficulty: 250
   }
 
   const cHeight = (canvasGame.height = 400),
@@ -65,19 +70,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   let interval;
   let changed = false;
+  let continueSpeed = true;
+
   checkGame = () => {
     if (player.collision == false) {
-        let score = document.getElementById('score')
-
         if (parseInt(score.textContent) % 10 == 0 && parseInt(score.textContent) != 0 && changed == false) {
             if (level.difficulty >= 300) {
                 changed = true;
-                level.difficulty -= 50
-                console.log(level.difficulty);
+                continueSpeed ? level.difficulty -= 50 : null
                 clearInterval(interval)
                 startInterval()
             } else {
                 // Mostrar diálogo para poner el modo ultra díficil
+                dialog.classList.remove('hide')
+                clearInterval(interval)
             }
         } else if (parseInt(score.textContent) % 10 != 0) changed = false;
 

@@ -12,7 +12,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="score">0</h1>
+    <div class="title"><h1>SNAKE GAME</h1></div>
+    <div class="scoreWrapper">
+        <h2 id="score-title">Score</h2>
+        <h1 id="score">0</h1>
+    </div>
+
+    <div class="container hide" id="dialog">
+        <div class="cookiesContent" id="cookiesPopup">
+          <!-- <button id="close" class="close">✖</button> -->
+          <img src="img/snake.png" alt="cookies-img" />
+          <p>¿Quieres Seguir en la dificultad actual o seguir aumentandola?</p>
+          <button id="accept" class="accept">Seguir Subiendo</button>
+          <button id="decline" class="decline">Así está bien</button>
+        </div>
+      </div>
+
     <canvas id="canvasGame"></canvas>
 </body>
 </html>

@@ -3,6 +3,27 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.title {
+    font-size: xxx-large;
+    color: #646d8b;
+    text-decoration: underline overline;
+    text-underline-offset: 15px;
+}
+
+#score {
+    margin-right: 10px;
+}
+
+div.scoreWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    margin-right: 10px;
+    margin: 15px;
+}
   
 html,
 body {
@@ -16,9 +37,86 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     color: #6e7888;
 }
 
 canvas {
     background-color: #151523;
+}
+
+
+/* body {
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+} */
+
+.hide {
+    display: none;
+}
+
+.container {
+    position: absolute;
+}
+
+.cookiesContent {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    border-radius: 20px;
+    padding: 30px 30px 70px;
+}
+.cookiesContent button.close {
+    width: 30px;
+    font-size: 20px;
+    color: #c0c5cb;
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 10px;
+}
+.cookiesContent img {
+    width: 82px;
+    margin-bottom: 15px;
+}
+.cookiesContent p {
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.cookiesContent button {
+    cursor: pointer;
+}
+
+.cookiesContent button.accept {
+    background-color: #ed6755;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0px 6px 18px -5px #ed6755;
+}
+
+.cookiesContent button.decline {
+    margin-top: 10px;
+    background-color: #ed6755;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0px 6px 18px -5px #ed6755;
 }
