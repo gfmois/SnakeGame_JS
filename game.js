@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const canvasGame = document.querySelector("canvas");
   const ctx = canvasGame.getContext("2d");
 
+  const level = {
+    difficulty: 500
+  }
+
   const cHeight = (canvasGame.height = 400),
     cWidth = (canvasGame.width = 400);
 
@@ -60,8 +64,24 @@ document.addEventListener("DOMContentLoaded", (e) => {
   };
 
   let interval;
+  let changed = false;
   checkGame = () => {
     if (player.collision == false) {
+        let score = document.getElementById('score')
+
+        if (parseInt(score.textContent) % 10 == 0 && parseInt(score.textContent) != 0 && changed == false) {
+            if (level.difficulty >= 300) {
+                changed = true;
+                level.difficulty -= 50
+                console.log(level.difficulty);
+                clearInterval(interval)
+                startInterval()
+            } else {
+                // Mostrar diálogo para poner el modo ultra díficil
+            }
+        } else if (parseInt(score.textContent) % 10 != 0) changed = false;
+
+
       player.movement();
       player.checkCollision(food);
       food.collision(player);
@@ -71,10 +91,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
     } else clearInterval(interval);
   };
 
-  interval = setInterval(() => {
-    checkGame()
-  }, 500)
+  startInterval = () => {
+    interval = setInterval(() => {
+        checkGame()
+      }, level.difficulty)
+  }
 
+  startInterval()
   drawGrid();
   drawPlayer();
 });

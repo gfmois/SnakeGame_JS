@@ -11,6 +11,8 @@ class Player {
     this.oldDirection = "";
     this.direction = "";
     this.collision = false;
+    this.score = 9;
+    this.scoreTable = document.getElementById('score')
   }
 
   draw() {
@@ -84,8 +86,6 @@ class Player {
     } else {
         this.direction = this.oldDirection
     }
-
-    
   }
 
   setDirection(direction) {
@@ -107,6 +107,8 @@ class Player {
       if (block.constructor.name == "Food") {
         let body = new Body(this.oldX, this.oldY, this.ctx);
         body.draw();
+        this.score++;
+        this.scoreTable.textContent = this.score
         this.bodyParts.push(body);
       } else {
         this.collision = true;
