@@ -8,6 +8,7 @@ class Player {
     this.name = name;
     this.ctx = ctx;
     this.bodyParts = [];
+    this.oldDirection = "";
     this.direction = "";
     this.collision = false;
   }
@@ -27,8 +28,8 @@ class Player {
     this.y = newY;
 
     this.bodyParts.forEach((item) => {
-        this.checkCollision(item)
-    })
+      this.checkCollision(item);
+    });
 
     this.ctx.fillRect(newX, newY, 20, 20);
     this.updateBody();
@@ -48,33 +49,47 @@ class Player {
   }
 
   movement() {
-    switch (this.direction) {
-      case "DOWN":
-        this.y != 380
-          ? this.update(this.x, this.y + 20)
-          : this.update(this.x, 0);
-        break;
-      case "UP":
-        this.y == 0
-          ? this.update(this.x, 380)
-          : this.update(this.x, this.y - 20);
-        break;
-      case "LEFT":
-        this.x == 0
-          ? this.update(380, this.y)
-          : this.update(this.x - 20, this.y);
-        break;
-      case "RIGHT":
-        this.x != 380
-          ? this.update(this.x + 20, this.y)
-          : this.update(0, this.y);
-        break;
-      default:
-        break;
+    let directions = {
+      DOWN: "UP",
+      UP: "DOWN",
+      LEFT: "RIGHT",
+      RIGHT: "LEFT",
+    };
+
+    if (this.oldDirection != directions[this.direction]) {
+        switch (this.direction) {
+            case "DOWN":
+              this.y != 380
+                ? this.update(this.x, this.y + 20)
+                : this.update(this.x, 0);
+              break;
+            case "UP":
+              this.y == 0
+                ? this.update(this.x, 380)
+                : this.update(this.x, this.y - 20);
+              break;
+            case "LEFT":
+              this.x == 0
+                ? this.update(380, this.y)
+                : this.update(this.x - 20, this.y);
+              break;
+            case "RIGHT":
+              this.x != 380
+                ? this.update(this.x + 20, this.y)
+                : this.update(0, this.y);
+              break;
+            default:
+              break;
+          }
+    } else {
+        this.direction = this.oldDirection
     }
+
+    
   }
 
   setDirection(direction) {
+    this.oldDirection = this.direction;
     this.direction = direction;
   }
 
@@ -83,21 +98,19 @@ class Player {
   }
 
   checkCollision(block) {
-    console.log(this.collision);
-
-      if (
-        block.x < this.x + 20 &&
-        block.x + 20 > this.x &&
-        block.y < this.y + 20 &&
-        block.y + 20 > this.y
-      ) {
-        if (block.constructor.name == "Food") {
-            let body = new Body(this.oldX, this.oldY, this.ctx);
-            body.draw();
-            this.bodyParts.push(body);
-        } else {
-            this.collision = true;
-        }
+    if (
+      block.x < this.x + 20 &&
+      block.x + 20 > this.x &&
+      block.y < this.y + 20 &&
+      block.y + 20 > this.y
+    ) {
+      if (block.constructor.name == "Food") {
+        let body = new Body(this.oldX, this.oldY, this.ctx);
+        body.draw();
+        this.bodyParts.push(body);
+      } else {
+        this.collision = true;
+      }
     }
   }
 }
