@@ -1,4 +1,4 @@
-export class Food {
+class Food {
     constructor(x, y, color, ctx) {
         this.x = x
         this.y = y
