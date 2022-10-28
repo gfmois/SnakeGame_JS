@@ -1,0 +1,117 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  color: #6e7888;
+}
+
+body {
+  background-color: #222738;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #6e7888;
+}
+
+.ranking-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 100%;
+}
+
+.ranking-title {
+  grid-area: 1 / 1 / 2 / 4;
+  padding: 5px;
+  margin: 5px;
+  font-size: 35px;
+  margin-top: 25px;
+  text-align: center;
+}
+.ranking-normal-mode {
+  grid-area: 2 / 1 / 6 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ranking-speed-mode {
+  grid-area: 2 / 2 / 6 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ranking-hard-mode {
+  grid-area: 2 / 3 / 6 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.back-button {
+  grid-area: 6 / 2 / 7 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.ranking-grid > div > div.ranking-title-mode {
+  margin: 30px;
+  padding: 5px;
+  font-size: 25px;
+  border-top: 3px solid #6e7888;
+  border-bottom: 3px solid #6e7888;
+}
+
+.ranking-grid > div > div.ranking-positions > ul {
+  list-style-type: none;
+  font-size: 25px;
+  padding: 20px;
+}
+
+.ranking-grid > div > div.ranking-positions > ul > li {
+  padding: 10px;
+}
+
+/* Button */
+:root {
+  --background-color: #000;
+  --color: #000;
+  --light-theme: #fff;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 60px;
+  background-color: var(--light-theme);
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--color);
+  transition: all 0.3s;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 6px 30px -10px rgba(204, 204, 204, 1);
+}
+
+.btn:hover {
+  transform: translateX(5px) translateY(-7px);
+}
+.shop-now {
+  position: relative;
+}

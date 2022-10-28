@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game</title>
     <script src="src/game.js"></script>
     <script src="src/class/Body.js"></script>
     <script src="src/class/Food.js"></script>
     <script src="src/class/Player.js"></script>
-    <link rel="stylesheet" href="src/styles/style.css">
-</head>
-<body>
-    <div class="title"><h1>SNAKE GAME</h1></div>
-    <div class="scoreWrapper">
+    <link rel="stylesheet" href="src/styles/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="title"> Snake Game </div>
+      <ul>
+        <li><a href="index.html">PLAY</a></li>
+        <li><a href="ranking.html">RANKING</a></li>
+        <li><a href="profile.html">ACCOUNT</a></li>
+        <li><img id="avatar"></li>
+      </ul>
+    </nav>
+
+    <div class="points-wrapper">
+      <div class="scoreWrapper">
         <h2 id="score-title">Score</h2>
         <h1 id="score">0</h1>
+      </div>
     </div>
 
     <div class="container hide" id="dialog">
-        <div class="cookiesContent" id="cookiesPopup">
-          <!-- <button id="close" class="close">✖</button> -->
-          <img src="src/img/snake.png" alt="cookies-img" />
-          <p>¿Quieres Seguir en la dificultad actual o seguir aumentandola?</p>
-          <button id="accept" class="accept">Seguir Subiendo</button>
-          <button id="decline" class="decline">Así está bien</button>
-        </div>
+      <div class="cookiesContent" id="cookiesPopup">
+        <img src="src/img/snake.png" alt="cookies-img" />
+        <p>¿Quieres Seguir en la dificultad actual o seguir aumentandola?</p>
+        <button id="accept" class="accept">Seguir Subiendo</button>
+        <button id="decline" class="decline">Así está bien</button>
       </div>
+    </div>
 
     <canvas id="canvasGame"></canvas>
-</body>
+  </body>
 </html>
