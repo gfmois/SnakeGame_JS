@@ -121,22 +121,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
       player.draw();
       food.draw();
       drawGrid();
-    } else  {
+    } else {
       clearInterval(interval);
       //! Cuando muere
       //? Comporobar score inferior al topScore del jugador, actualizar si true
       //? hacer petición para actualizar
-      if (score.textContent > user.score[level.mode].score || score.textContent > 0) {
-        fetch('http://localhost:3000/score/updateScore', {
-          method: 'POST',
-          headers: { 'Content-Type': "application/json" },
-          body: JSON.stringify({
-            uuid: user.uuid,
-            mode: level.mode,
-            score: score.textContent
-          })
-        }).then((res) => res.json()).then((e) => e)
-      }
+      console.log(level.mode);
+
+      fetch('http://localhost:3000/score/setScore', {
+        method: 'POST',
+        headers: { 'Content-Type': "application/json" },
+        body: JSON.stringify({
+          uuid: user.uuid,
+          mode: level.mode,
+          score: score.textContent
+        })
+      }).then((res) => res.json()).then((e) => e)
     }
   };
 

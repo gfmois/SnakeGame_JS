@@ -24,3 +24,9 @@ exports.getTopPlayers = async (req, res) => {
     res.json(e);
   }
 };
+
+exports.setScore = async (req, res) => {
+  try {
+    res.json(await scoreController.setScore(req.body))
+  } catch (e) { res.json(e) }
+}
