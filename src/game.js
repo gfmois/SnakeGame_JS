@@ -123,10 +123,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
       drawGrid();
     } else {
       clearInterval(interval);
-      //! Cuando muere
-      //? Comporobar score inferior al topScore del jugador, actualizar si true
-      //? hacer petición para actualizar
-      console.log(level.mode);
 
       fetch('http://localhost:3000/score/setScore', {
         method: 'POST',

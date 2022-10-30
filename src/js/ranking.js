@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    let count = 0;
     let userLis = Array.from(document.querySelectorAll('li#user'))
 
     if (localStorage.getItem('token')) {
         let user = JSON.parse(atob(localStorage.getItem('token')))
-        let userScore = [];
         let ranking = {};
 
         userScore = await fetch(`http://localhost:3000/score/getUserScore?uuid=${user.uuid}`, {
