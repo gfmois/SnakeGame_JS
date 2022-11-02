@@ -8,7 +8,7 @@ class Body {
     }
 
     draw() {
-        this.ctx.fillStyle = 'red';
+        this.ctx.fillStyle = localStorage.getItem('bcolor') || localStorage.getItem('hcolor');
         this.ctx.fillRect(this.x, this.y, 20, 20)
     }
 
@@ -21,6 +21,7 @@ class Body {
         this.x = newX
         this.y = newY
         
+        this.ctx.fillStyle = localStorage.getItem('bcolor') || localStorage.getItem('hcolor');
         this.ctx.fillRect(this.x, this.y, 20, 20)
     }
 }

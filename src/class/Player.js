@@ -16,7 +16,7 @@ class Player {
   }
 
   draw() {
-    this.ctx.fillStyle = this.color;
+    this.ctx.fillStyle = localStorage.getItem('hcolor') || this.color;
     this.ctx.fillRect(this.x, this.y, 20, 20);
   }
 

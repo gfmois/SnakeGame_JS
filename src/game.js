@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   acceptOption.addEventListener("click", () => {
     if (level.mode == 'normal') {
-      console.log('Inside_N');
       level.difficulty = 75;
       level.mode = 'speed'
       dialog.classList.add("hide");
@@ -27,7 +26,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
 
     if (level.mode == 'speed') {
-      console.log('Inside_S');
       level.difficulty = 50;
       level.mode = 'hard'
       dialog.classList.add("hide");
@@ -39,7 +37,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   declineOption.addEventListener("click", () => {
     dialog.classList.add("hide");
-    level.mode = 'normal'
+    // level.mode = 'normal'
     startInterval();
   });
 

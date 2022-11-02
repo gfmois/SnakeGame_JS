@@ -85,3 +85,28 @@ button:hover {
 button:active {
     transform: translateY(-1px);
 }
+
+button#logout:hover {
+    background-color: #c42323;
+    box-shadow: 0px 15px 20px rgba(229, 46, 46, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+button#logout:active {
+    transform: translateY(-1px);
+}
+
+.mode-ranking > div {
+    color: #000;
+}
+
+.colors > div > div {
+    margin: 10px;
+}
+
+div > label {
+    color: black;
+    font-size: 20px;
+    padding: 10px;
+}
