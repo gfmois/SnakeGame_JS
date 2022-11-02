@@ -13,13 +13,28 @@ document.addEventListener("DOMContentLoaded", (e) => {
   let acceptOption = document.getElementById("accept");
   let declineOption = document.getElementById("decline");
 
-  let inside = 0;
+  let inside = 0, h_inside = 0;
 
   acceptOption.addEventListener("click", () => {
-    level.difficulty = 75;
-    level.mode = 'speed'
-    dialog.classList.add("hide");
-    startInterval();
+    if (level.mode == 'normal') {
+      console.log('Inside_N');
+      level.difficulty = 75;
+      level.mode = 'speed'
+      dialog.classList.add("hide");
+      startInterval();
+
+      return
+    }
+
+    if (level.mode == 'speed') {
+      console.log('Inside_S');
+      level.difficulty = 50;
+      level.mode = 'hard'
+      dialog.classList.add("hide");
+      startInterval();
+
+      return
+    }
   });
 
   declineOption.addEventListener("click", () => {
@@ -29,7 +44,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   });
 
   const level = {
-    difficulty: 250,
+    difficulty: 350,
     mode: 'normal'
   };
 
@@ -112,6 +127,12 @@ document.addEventListener("DOMContentLoaded", (e) => {
             clearInterval(interval);
             inside++
           }
+        }
+      } else if (parseInt(score.textContent) >= 50) {
+        if (h_inside == 0) {
+          dialog.classList.remove('hide')
+          clearInterval(interval)
+          h_inside++
         }
       } else if (parseInt(score.textContent) % 10 != 0) changed = false;
 

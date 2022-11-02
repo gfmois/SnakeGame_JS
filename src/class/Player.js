@@ -11,7 +11,7 @@ class Player {
     this.oldDirection = "";
     this.direction = "";
     this.collision = false;
-    this.score = 9;
+    this.score = 0;
     this.scoreTable = document.getElementById('score')
   }
 
